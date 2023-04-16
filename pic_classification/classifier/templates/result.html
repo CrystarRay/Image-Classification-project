@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Image Classification Result</h2>
+  <p>The image is classified as:</p>
+  <ul>
+  {% for class_name, probability in classification_result %}
+    <li>{{ class_name }} ({{ probability|floatformat:2 }}%)</li>
+  {% endfor %}
+  </ul>
+  <a href="{% url 'upload_image' %}">Upload another image</a>
+{% endblock %}
