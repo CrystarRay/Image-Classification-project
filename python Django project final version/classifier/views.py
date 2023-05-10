@@ -21,14 +21,17 @@ def index(request):
             uploaded_file_url = fs.path(filename)
 
             # Call the classify_image function to get the prediction.
-            prediction = classify_image(uploaded_file_url)
+            predictions = classify_image(uploaded_file_url)
+            prediction = predictions[0]
+            rounded_predictions =  map(lambda x : int(x * 100), predictions[1])
 
             # Delete the temporary image file.
             fs.delete(filename)
 
             # Render the template with the classification message.
             return render(request, 'index.html',
-                          {'classification_message': f'The image is classified as number: {prediction}'})
+                          {'classification_message': f'The image is classified as number: {prediction}',
+                          'classifications': rounded_predictions})
 
     # If the request method is not POST, display the empty form.
     else:

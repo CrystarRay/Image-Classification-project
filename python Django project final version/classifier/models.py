@@ -21,4 +21,4 @@ def classify_image(image_path):
     predictions = model.predict(img_array)
     predicted_class = np.argmax(predictions[0])
 
-    return predicted_class
+    return (predicted_class, predictions[0])
